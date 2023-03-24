@@ -41,7 +41,38 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Other apps…
+    "phonenumber_field",
+    'location_field.apps.DefaultConfig',
+    # Rest
+    'drf_yasg',  # new
+    'django_seed',
+    'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'allauth',  # new
+    'allauth.account',  # new
+    'allauth.socialaccount',  # new
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    # My apps
+    'main.apps.MainConfig',
+    'api.apps.ApiConfig',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,14 +109,25 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.environ["PGDATABASE"],
+#         'USER': os.environ["PGUSER"],
+#         'PASSWORD': os.environ["PGPASSWORD"],
+#         'HOST': os.environ["PGHOST"],
+#         'PORT': os.environ["PGPORT"],
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["PGDATABASE"],
-        'USER': os.environ["PGUSER"],
-        'PASSWORD': os.environ["PGPASSWORD"],
-        'HOST': os.environ["PGHOST"],
-        'PORT': os.environ["PGPORT"],
+        'NAME': "railway",
+        'USER': "postgres",
+        'PASSWORD': "DEUhqQK50NfLTSibdpgN",
+        'HOST': "containers-us-west-113.railway.app",
+        'PORT': 6624,
     }
 }
 
