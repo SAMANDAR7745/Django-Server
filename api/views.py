@@ -9,7 +9,6 @@ from rest_framework.request import Request
 from rest_framework import status, viewsets
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 import django_filters
 from rest_framework import filters
 
@@ -29,7 +28,7 @@ class CategoryCreateListView(APIView):
 
 
 class CategoryRetrieveUpdateDestroyAPIView(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    
 
     def get(self, pk):
         product = get_object_or_404(Category, pk=pk)
