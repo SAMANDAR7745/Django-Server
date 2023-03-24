@@ -60,7 +60,6 @@ class ProductCreateListView(ListCreateAPIView):
 
 
 class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     location_field = 'pk'
@@ -76,7 +75,6 @@ class BrendCreateListView(ListCreateAPIView):
 
 
 class BrendUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Brend.objects.all()
     serializer_class = BrendSerializer
     location_field = 'pk'
