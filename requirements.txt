@@ -13,3 +13,4 @@ dj_rest_auth==3.0.0
 phonenumbers==8.13.7
 Pillow==9.4.0
 django-phonenumber-field==7.0.2
+uritemplate==4.1.1
