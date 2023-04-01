@@ -28,8 +28,6 @@ class CategoryCreateListView(APIView):
 
 
 class CategoryRetrieveUpdateDestroyAPIView(APIView):
-    
-
     def get(self, pk):
         product = get_object_or_404(Category, pk=pk)
         serializer = CategorySerializer(product)
