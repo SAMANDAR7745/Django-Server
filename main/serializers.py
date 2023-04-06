@@ -29,15 +29,11 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    client_name = serializers.SerializerMethodField()
-
     class Meta:
         model = Order
         fields = ('id', 'client', 'total_price', 'is_paid', 'shipping', 'created', 'updated', 'client_name')
         read_only_fields = ("id",)
 
-    def get_client_name(self, obj):
-        return obj.client.full_name
 
 
 class OrderItemSerializer(serializers.ModelSerializer):

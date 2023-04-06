@@ -99,12 +99,10 @@ class OrderCreateListView(mixins.ListModelMixin,
     """
 
     def get(self, request):
-        food = Order.objects.all().order_by('-id')
-        serializer = OrderSerializer(food, many=True)
+        order = Order.objects.all()
+        serializer = OrderSerializer(order, many=True)
         return render(request, 'forms/list.html', context={"orderget": serializer.data})
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
 
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ["is_paid", 'shipping', "client"]
@@ -297,31 +295,3 @@ class CategoryRetrieveUpdateDestroyAPIView(APIView):
     def delete(self, pk):
         Category.objects.filter(id=pk).delete()
         return Response(data={}, status=status.HTTP_204_NO_CONTENT)
-
-
-class ProductCreateListView(ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ["brend"]
-
-
-class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    location_field = 'pk'
-
-
-
-
-class BrendCreateListView(ListCreateAPIView):
-    queryset = Brend.objects.all()
-    serializer_class = BrendSerializer
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ["title"]
-
-
-class BrendUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Brend.objects.all()
-    serializer_class = BrendSerializer
-    location_field = 'pk'
