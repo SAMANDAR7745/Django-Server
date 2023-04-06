@@ -9,15 +9,63 @@ class CategorySerializer(serializers.ModelSerializer):
         read_only_fields = ("id",)
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class FoodSerializer(serializers.ModelSerializer):
+    cat = serializers.SerializerMethodField()
+
     class Meta:
-        model = Product
-        fields = ("id", "title", "desc", "image", "price", "rating", "cat_id", 'brend')
-        read_only_fields = ('id', 'cat_id', 'brend')
+        model = Food
+        fields = ('title', 'desc', 'image', 'price', 'rating', 'category', 'cat')
+        read_only_fields = ("id", 'cat')
+
+    def get_cat(self, obj):
+        return obj.category.title
 
 
-class BrendSerializer(serializers.ModelSerializer):
+class ClientSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Brend
+        model = Client
+        fields = "__all"
+        read_only_fields = ("id","image")
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    client_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Order
+        fields = ('id', 'client', 'total_price', 'is_paid', 'shipping', 'created', 'updated', 'client_name')
+        read_only_fields = ("id",)
+
+    def get_client_name(self, obj):
+        return obj.client.full_name
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    order = OrderSerializer()
+    food = FoodSerializer()
+
+    class Meta:
+        model = OrderItem
         fields = "__all__"
-        read_only_fields = ("",)
+        read_only_fields = ("id",)
+
+
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = "__all__"
+        read_only_fields = ("id",)
+
+
+class MembersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Members
+        fields = "__all__"
+        read_only_fields = ("id",)
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = "__all__"
+        read_only_fields = ("id",)
