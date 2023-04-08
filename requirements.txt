@@ -14,7 +14,7 @@ phonenumbers==8.13.7
 Pillow==9.4.0
 django-phonenumber-field==7.0.2
 
-4
+
 crispy-bootstrap5==0.7
 cryptography==40.0.1
 defusedxml==0.7.1
